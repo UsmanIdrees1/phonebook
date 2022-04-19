@@ -24,7 +24,6 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 console.log(db.type);
 onAuthStateChanged(auth, (user) => {
-  console.log(user.uid);
   store.dispatch("user_auth", user);
   new Vue({
     router,
