@@ -1,11 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomeView from "../views/AppHome.vue";
-import SignupView from "../views/AppSignup";
-import LoginView from "../views/AppLogin";
-import ForgetPass from "../views/ForgetPassword.vue";
+import ForgetPass from "../views/forgetPassword.vue";
 import store from "../store/index";
-// import { getAuth } from "firebase/auth";
+import VuetifyLogin from "../views/login";
+import VuetifySignup from "../views/signup";
+import home from "../views/dashboard";
 
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -15,59 +14,23 @@ const router = new VueRouter({
     {
       path: "/",
       name: "signup",
-      component: SignupView,
-      // beforeEnter(to, from, next) {
-      //   firebase.auth().onAuthStateChanged((user) => {
-      //     if (user) {
-      //       next("/secure");
-      //     } else {
-      //       next();
-      //     }
-      //   });
-      // },
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: LoginView,
-      // beforeEnter(to, from, next) {
-      //   firebase.auth().onAuthStateChanged((user) => {
-      //     if (user) {
-      //       next("/home");
-      //     } else {
-      //       next();
-      //     }
-      //   });
-      // },
+      component: VuetifySignup,
     },
     {
       path: "/home",
       name: "home",
-      component: HomeView,
+      component: home,
       meta: { requiresAuth: true },
-      // beforeEnter(to, from, next) {
-      // firebase.auth().onAuthStateChanged((user) => {
-      //   if (user) {
-      //     next();
-      //   } else {
-      //     next("/login");
-      //   }
-      // });
-      // },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: VuetifyLogin,
     },
     {
       path: "/forget",
       name: "forget",
       component: ForgetPass,
-      // beforeEnter(to, from, next) {
-      // firebase.auth().onAuthStateChanged((user) => {
-      //   if (user) {
-      //     next();
-      //   } else {
-      //     next("/login");
-      //   }
-      // });
-      // },
     },
   ],
 });
