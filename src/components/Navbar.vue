@@ -1,7 +1,17 @@
 <template>
   <div>
-    <v-navigation-drawer absolute temporary v-model="drawer" app>
+    <v-navigation-drawer
+      fixed
+      permanent
+      :mini-variant.sync="mini"
+      v-model="drawer"
+      app
+    >
       <v-list nav dense>
+        <v-btn icon @click.stop="mini = !mini">
+          <v-icon v-if="mini">chevron_right</v-icon>
+          <v-icon v-if="!mini">chevron_left</v-icon>
+        </v-btn>
         <!-- =========== not atuhenticated ========== -->
         <v-list-item-group
           active-class="deep-purple--text text--accent-4"
@@ -33,10 +43,18 @@
         >
           <v-list-item to="/home">
             <v-list-item-action>
-              <v-icon>home</v-icon>
+              <v-icon>dashboard</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
+              <v-list-item-title>Dashborad</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item to="/contacts">
+            <v-list-item-action>
+              <v-icon>phone</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Contacts</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click="logout">
@@ -52,9 +70,9 @@
     </v-navigation-drawer>
 
     <v-app-bar color="deep-purple" dark app>
-      <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer">
+      <!-- <v-app-bar-nav-icon class="white--text" @click="drawer = !drawer">
         <v-icon>menu</v-icon>
-      </v-app-bar-nav-icon>
+      </v-app-bar-nav-icon> -->
       <v-toolbar-title>Phone Book</v-toolbar-title>
       <v-spacer></v-spacer>
       <!-- =========== Not Authenticated============ -->
@@ -69,7 +87,7 @@
       <!-- =============Authenticated============= -->
       <div v-if="authenticated">
         <v-btn text class="hidden-xs-only">
-          <v-icon left dark>face</v-icon>Home
+          <v-icon left dark>home</v-icon>Home
         </v-btn>
         <v-btn @click="logout" text class="hidden-xs-only">
           <v-icon left dark>logout</v-icon>Logout
@@ -89,6 +107,7 @@ export default {
       drawer: false,
       group: null,
       authenticated: false,
+      mini: true,
     };
   },
   created() {
